@@ -60,6 +60,11 @@ var HTMLFootermobile = "<li class='flex-item'><span class='orange-text'>mobile</
 var HTMLFooteremail = "<li  class='flex-item'><span class='orange-text'>email</span><span class='white-text'>%data%</span></li>";
 var HTMLFootergithub = "<li class='flex-item'><span class='orange-text'>github</span><span class='white-text'>%data%</span></li>";
 
+var HTMLmodalStart="<div class='modal-entry'></div>";
+var HTMLmodalTitle= "<h2>%data%</h2>";
+var HTMLmodalDescription= "<p class='lead'><br>%data%</p>";
+var HTMLmodalClose= "<a class='close-reveal-modal'>&#215;</a>"
+
 
 
 

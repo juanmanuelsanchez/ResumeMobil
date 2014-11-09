@@ -119,20 +119,20 @@ var work= {
   {
     "title":"Mockup to Web Portfolio",
     "dates":"October 2014",
-    "description":"Lorem ipsum dolor sit amet etc, etc, etc.",
+    "description":"Lorem ipsum dolor sit amet etc, etc, etc.1",
     "images":["images/197x148.gif","images/197x148.gif"]
   },
   {
     "title":"Interactive Resume",
     "dates":"November 2014",
-    "description":"Lorem ipsum dolor sit amet etc, etc, etc.",
+    "description":"Lorem ipsum dolor sit amet etc, etc, etc.2",
     "images":["images/197x148.gif", "images/197x148.gif"]
   }
   ],
  
    display: function(){
 
-   
+    
      for(proyecto in projects.project){
 
       var formattedProjectStart= HTMLprojectStart;
@@ -141,7 +141,15 @@ var work= {
       var formattedProjectDates= HTMLprojectDates.replace("%data%", projects.project[proyecto].dates);
       var formattedProjectDescription= HTMLprojectDescription.replace("%data%", projects.project[proyecto].description);
       $(".project-entry:last").append(formattedProjectTitle + formattedProjectDates + formattedProjectDescription);
-
+      var formattedModalStart= HTMLmodalStart;
+      $("#myModal").append(formattedModalStart);
+      var formattedProjectModalTitle= HTMLmodalTitle.replace("%data%", projects.project[proyecto].title);
+      var formattedProjectModalDescription= HTMLmodalDescription.replace("%data%", projects.project[proyecto].description);
+      var formattedModalClose= HTMLmodalClose;
+      //$("#myModal").append(formattedProjectModalTitle);
+      //$("#myModal").append(formattedProjectModalDescription);
+      $(".modal-entry:last").append(formattedProjectModalTitle + formattedProjectModalDescription + formattedModalClose);
+      
        if(projects.project[proyecto].images.length>0){
 
         for(image in projects.project[proyecto].images){
@@ -149,12 +157,14 @@ var work= {
           var formattedProjectImages= HTMLprojectImage.replace("%data%", projects.project[proyecto].images[image]);
            $(".project-entry:last").append(formattedProjectImages);
 
+
+
              }
            }
          }
-
+        
       }
-
+   
   }
 
 
