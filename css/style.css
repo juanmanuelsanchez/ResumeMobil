@@ -268,14 +268,21 @@ span {
      border-width: 2px;
   }
 
+
+  #courses {
+  
+  padding-top: 20px;
+
+  }
+
   #letsConnect {
 
     margin-top: 10%;
   }
- 
-  #courses {
-  
-  padding-top: 20px;
+  #location-school {
+
+    float: center;
+    padding: 0px;
 
   }
   
@@ -306,9 +313,12 @@ span {
    .location-text {
 
     float: center;
+    padding: 10px;
 
 
   }
+
+
   .welcome-message {
 
     display: none;
