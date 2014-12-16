@@ -272,8 +272,8 @@ var map= {
     function createMapMarker(placeData) {
 
    
-    var lat = placeData.geometry.location.k;  
-    var lon = placeData.geometry.location.D;  
+    var lat = placeData.geometry.location.lat();  
+    var lon = placeData.geometry.location.lng();  
     var name = placeData.formatted_address;   
     var bounds = window.mapBounds;            
 
