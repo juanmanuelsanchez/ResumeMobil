@@ -273,7 +273,7 @@ var map= {
 
    
     var lat = placeData.geometry.location.k;  
-    var lon = placeData.geometry.location.B;  
+    var lon = placeData.geometry.location.D;  
     var name = placeData.formatted_address;   
     var bounds = window.mapBounds;            
 
