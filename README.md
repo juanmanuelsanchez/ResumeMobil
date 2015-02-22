@@ -1,4 +1,4 @@
-ResumeMobil
+ResumeMobil sepConcerns
 ===========
 
-Resume optimize for mobile devices
+Resume optimize for mobile devices with separation of concerns
