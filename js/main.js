@@ -319,6 +319,7 @@
 		initButtons: function() {
 			this.buttonsData= octopus.getTemplateButtons();
 			this.internationalizeButton= this.buttonsData.internationalizeButton;
+			//this.bioData= octopus.getBioData();
 			
 			this.renderButtons();
 			
@@ -329,6 +330,30 @@
 			var $main= $("#main");
 			$main.append(this.internationalizeButton);
 			
+			function inName() {
+              var bioData= octopus.getBioData(),
+                  str= bioData.name,
+                  space= " ",
+                  myArray= str.split(space),
+                  firstName= myArray[0],
+                  firstLetterName= firstName[0].toUpperCase(),
+                  restOfName= firstName.slice(1, firstName.length),
+                  secondName= myArray[1],
+                  secondNameUpperCase= secondName.toUpperCase(),
+                  thirdName= myArray[2],
+                  thirdNameUpperCase= thirdName.toUpperCase(),
+                  newName= firstLetterName+restOfName+ space + secondNameUpperCase + space + thirdNameUpperCase;
+                  //console.log(newName);
+
+                  return newName;
+
+                }
+
+             $('button').click(function() {
+               var iName = inName() || function(){};
+               $('#name').html(iName);  
+            
+           });
 		}
 		
 	};
