@@ -170,7 +170,14 @@
              "HTMLonlineDates":"<div class='date-text'>%data%</div>",
              "HTMLonlineURL":"<a id='onlineURL' href='%url%'>%data%</a>"
 			  
+		  },
+
+		  templateMap: {
+
+            "HTMLgoogleMap":"<div id='map'></div>"
+
 		  }
+
 	};
 	
 	
@@ -184,6 +191,7 @@
 			viewWork.initWorks();
 			viewProject.initProjects();
 			viewEducation.initEducation();
+			viewMap.display();
 		 	
 		},
 		
@@ -248,10 +256,15 @@
 		getTemplateEducation: function() {
 		
 		    return model.templateEducation;	
+		},
+
+		getTemplateMap: function() {
+
+
+			return model.templateMap;
 		}
 		
-		
-		
+	
 		
 	};
 	
@@ -533,7 +546,124 @@
 				}
 		   }
 	};
+
+
+	var viewMap= {
+
+     init: function() {
+          
+          var map;
+          var locations;        
+          var mapOptions = {
+          disableDefaultUI: true
+
+          };
+   
+          map = new google.maps.Map(document.querySelector('#map'), mapOptions);
+
+
+         function locationFinder() {
+           var i=0;
+           var j=0;
+           var bioData= octopus.getBioData();
+           var jobsData= octopus.getJobsData();
+           var schoolsData= octopus.getschoolsData();
+           var locations = [];
+           locations.push(bioData.contacts.location);
+           for(i; i<schoolsData.length; i++) {
+					  
+			var schools= schoolsData[i];
+			var schoolsLocations= schools.location;
+			locations.push(schoolsLocations);
+
+		}
+		  for(j; j<jobsData.length; j++) {
+
+		  	var jobs= jobsData[j];
+		  	var jobsLocations= jobs.location;
+		  	locations.push(jobsLocations);
+		  }
+
+          console.log(locations);
+          return locations;
+
+        }
+
+
+        function createMapMarker(placeData) {
+
+   
+          var lat = placeData.geometry.location.lat();  
+          var lon = placeData.geometry.location.lng();  
+          var name = placeData.formatted_address;   
+          var bounds = window.mapBounds;            
+
+          var marker = new google.maps.Marker({
+           map: map,
+           position: placeData.geometry.location,
+           title: name
+         });
+    
+         var infoWindow = new google.maps.InfoWindow({
+         content: name
+         });
+
+         google.maps.event.addListener(marker, 'click', function() {
+         infoWindow.open(map, marker);
+         });
+
+         bounds.extend(new google.maps.LatLng(lat, lon));
+    
+         map.fitBounds(bounds);
+
+         map.setCenter(bounds.getCenter());
+
+        }
+
+
+      function callback(results, status) {
+       if (status == google.maps.places.PlacesServiceStatus.OK) {
+       createMapMarker(results[0])
+        }
+      }
+
+      function pinPoster(locations) {
+
+        var service = new google.maps.places.PlacesService(map);
+    
+        for (place in locations) {
+
+        var request = {
+          query: locations[place]
+        }
+
+         service.textSearch(request, callback);
+        }
+      }
+
+        window.mapBounds = new google.maps.LatLngBounds();
+
+  
+        locations = locationFinder();
+        pinPoster(locations);
+
+        window.addEventListener('resize', function(e) {
+        map.fitBounds(mapBounds);
+      });
+    
+   },
+
+    display: function() {
+       var googleMapTemplate= octopus.getTemplateMap();
+       var formattedMap= googleMapTemplate.HTMLgoogleMap;
+       $('#mapDiv').append(formattedMap);
+
+      window.addEventListener('load', viewMap.init);
+    }
+
+
+
+};
 	
 	octopus.init();
-	
 }());
