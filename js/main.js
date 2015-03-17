@@ -329,6 +329,9 @@
 			
 			var $main= $("#main");
 			$main.append(this.internationalizeButton);
+			var clickLocations = [];
+            var x=null;
+            var y= null;
 			
 			function inName() {
               var bioData= octopus.getBioData(),
@@ -354,9 +357,30 @@
                $('#name').html(iName);  
             
            });
-		}
+
+
+         
+            function logClicks(x,y) {
+                  clickLocations.push(
+                  {
+                 "x": x,
+                 "y": y
+                  }
+                 );
+              console.log("x location: " + x + "; y location: " + y);
+              }
+
+            $(document).click(function(loc) {
+      
+            x= loc.pageX;
+            y= loc.pageY;
+
+            logClicks(x,y);
+  
+           });
+	    }
 		
-	};
+	  };
 	
 	var viewSkills= {
 		
